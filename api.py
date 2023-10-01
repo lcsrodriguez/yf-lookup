@@ -1,5 +1,3 @@
-import pprint
-
 from src import *
 
 app = FastAPI()
@@ -21,7 +19,7 @@ def search(ticker_lookup: str = Form(None)):
                          "q": str(ticker_lookup),
                          "lang": "en-US",
                          "region": "US",
-                         "quotesCount": 10,
+                         "quotesCount": 20,
                      },
                      headers={
                          "Accept": "*/*",
@@ -34,4 +32,26 @@ def search(ticker_lookup: str = Form(None)):
     if r.status_code // 100 != 2:
         return f""
     data: dict = r.json()
-    return f"<b>{ticker_lookup}</b><p>{data['quotes']}</p>"
+    l = []
+    s = "<table>"
+    i = 0
+    headers_ = ["exchange", "shortname", "quoteType", "symbol", "index", "score", "longname"]
+    for q in data["quotes"]:
+        q2 = {}
+        if q["isYahooFinance"] is True:
+            for h in headers_:
+                if h in q:
+                    q2[h] = q[h]
+            i += 1
+            if i == 1:
+                s += f"<tr>"
+                for e in list(q2.keys()):
+                    s += f"<th>{e}</th>"
+                s += "</tr>"
+            l.append(q2)
+            s += f"<tr>"
+            for e in list(q2.values()):
+                s += f"<td>{e}</td>"
+            s += "</tr>"
+            print(q2)
+    return f"<b>{ticker_lookup}</b><br><br>{s}"
