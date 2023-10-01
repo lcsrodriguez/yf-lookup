@@ -10,6 +10,7 @@ def homeRoute(request: Request):
 
 
 @app.post('/search')
-def search(ticker_lookup: str = Form(...)):
-    print(ticker_lookup)
+def search(ticker_lookup: str = Form(None)):
+    if ticker_lookup is None:
+        return f""
     return f"<b>{ticker_lookup}</b>"
