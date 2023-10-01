@@ -36,6 +36,7 @@
                     })
                     .then(response => response.text())
                     .then(data => {
+                        data = data.replaceAll('"', '')
                         document.getElementById("response").innerHTML = data;
                     })
                     .catch(error => {
