@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Yahoo Finance - Ticker lookup</title>
+        <meta charset="UTF-8">
+        <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+          document.getElementById("ticker_form").addEventListener("input", function (e) {
+            e.preventDefault(); // Cancel the default action
+            submitForm();
+          });
+        });
+      </script>
+    </head>
+    <body>
+        <h1>Yahoo Finance - Ticker lookup</h1>
+
+        <form method="POST" action="/search" id="ticker_form">
+            <input autofocus
+                   autocomplete="off"
+                   type="text"
+                   id="ticker_lookup"
+                   name="ticker_lookup"
+                   placeholder="Ticker...">
+        </form>
+        <p id="response">
+
+        </p>
+        <script>
+             function submitForm() {
+                var formElement = document.getElementById('ticker_form');
+                var data = new FormData(formElement);
+                fetch('/search', {
+                        method: 'POST',
+                        body: data,
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("response").innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+             }
+          </script>
+    </body>
+</html>
