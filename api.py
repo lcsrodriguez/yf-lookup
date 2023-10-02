@@ -10,7 +10,7 @@ def homeRoute(request: Request):
 
 
 @app.post('/search')
-def search(ticker_lookup: str = Form(None)):
+def searchRoute(ticker_lookup: str = Form(None)):
     if ticker_lookup is None:
         return f""
 
@@ -33,25 +33,25 @@ def search(ticker_lookup: str = Form(None)):
         return f""
     data: dict = r.json()
     l = []
-    s = "<table>"
+    s = "<table class='table'>"
     i = 0
-    headers_ = ["exchange", "shortname", "quoteType", "symbol", "index", "score", "longname"]
+    headers_ = ["exchange", "shortname", "quoteType", "symbol", "index"]
     for q in data["quotes"]:
         q2 = {}
         if q["isYahooFinance"] is True:
             for h in headers_:
                 if h in q:
                     q2[h] = q[h]
+            q2["link"] = f"<a target='_BLANK' href='https://finance.yahoo.com/quote/{q2['symbol']}' role='button' class='btn btn-primary btn-sm' style='width:100px'>{q2['symbol']}<a>"
             i += 1
             if i == 1:
-                s += f"<tr>"
+                s += f"<thead><tr>"
                 for e in list(q2.keys()):
                     s += f"<th>{e}</th>"
-                s += "</tr>"
+                s += "</tr></thead>"
             l.append(q2)
             s += f"<tr>"
             for e in list(q2.values()):
                 s += f"<td>{e}</td>"
             s += "</tr>"
-            print(q2)
-    return f"<b>{ticker_lookup}</b><br><br>{s}"
+    return f"Results for: <b><i>{ticker_lookup}</i></b><br><br>{s}"
