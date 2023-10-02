@@ -42,7 +42,10 @@ def searchRoute(ticker_lookup: str = Form(None)):
             for h in headers_:
                 if h in q:
                     q2[h] = q[h]
-            q2["link"] = f"<a target='_BLANK' href='https://finance.yahoo.com/quote/{q2['symbol']}' role='button' class='btn btn-primary btn-sm' style='width:100px'>{q2['symbol']}<a>"
+            print(q2)
+            c = colors.get(q2["quoteType"], "primary") # if q2["quoteType"] in list(colors.keys()) else "primary"
+            print(c)
+            q2["link"] = f"<a target='_BLANK' href='https://finance.yahoo.com/quote/{q2['symbol']}' role='button' class='btn btn-{c} btn-sm' style='width:100px'>{q2['symbol']}<a>"
             i += 1
             if i == 1:
                 s += f"<thead><tr>"
