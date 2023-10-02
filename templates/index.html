@@ -7,6 +7,14 @@
               rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
               crossorigin="anonymous">
+        <style>
+            .container{
+                width: auto;
+                max-width: 680px;
+                padding: 0 15px;
+                margin: 100px auto;
+            }
+        </style>
         <script>
         document.addEventListener("DOMContentLoaded", (event) => {
           document.getElementById("ticker_form").addEventListener("input", function (e) {
@@ -17,19 +25,23 @@
       </script>
     </head>
     <body>
-        <h1>Yahoo Finance - Ticker lookup</h1>
+        <main class="container">
+            <h1 class="h1"
+                style="border-bottom: 2px solid #ddd; padding: 5px 0">Yahoo Finance - Ticker lookup</h1>
 
-        <form method="POST" action="/search" id="ticker_form">
-            <input autofocus
-                   autocomplete="off"
-                   type="text"
-                   id="ticker_lookup"
-                   name="ticker_lookup"
-                   placeholder="Ticker...">
-        </form>
-        <p id="response">
+            <form method="POST" action="/search" id="ticker_form" style="margin: 50px 0 0 0">
+                <input class="form-control form-control-lg"
+                       autofocus
+                       autocomplete="off"
+                       type="text"
+                       id="ticker_lookup"
+                       name="ticker_lookup"
+                       placeholder="Ticker...">
+            </form>
+            <p id="response" style="margin: 20px 0">
 
-        </p>
+            </p>
+        </main>
         <script>
              function submitForm() {
                 var formElement = document.getElementById('ticker_form');
