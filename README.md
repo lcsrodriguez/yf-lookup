@@ -2,7 +2,9 @@
 
 ## Overview
 
-<img width="600px" src="img/demo.gif"/>
+Light-weight, dynamic and interactive web-based tool to lookup tickers and company names registered on Yahoo! Finance.
+
+<img width="500px" src="img/demo.gif"/>
 
 ## Getting started
 
