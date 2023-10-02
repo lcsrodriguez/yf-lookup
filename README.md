@@ -4,7 +4,10 @@
 
 Light-weight, dynamic and interactive web-based tool to lookup tickers and company names registered on Yahoo! Finance.
 
-<img width="500px" src="img/demo.gif"/>
+| <img width="500px" src="img/demo.gif"/> | 
+|:--:| 
+| **Fig. 1** : Demo of lookup for **MSFT** and **GOOGL** |
+
 
 ## Getting started
 
